@@ -25,9 +25,9 @@ This might seem like a convenience---it certainly makes the code much more compa
       [(node V L R) e2]) : T
 ```)
 
-The first antecedent is clear: we have to confirm that the expression `e` evaluates to a `BT` before we pattern-match `BT` patterns against it. 
-The second type-checks `e1` in the same environment as in the consequent because the `mt` variant does not add any local bindings. The type of this expression needs to be the same as the type from the other branch, due to how we're handling conditionals. 
-Finally, to type-check `e2`, we have to extend the consequent's type environment with the bound variables; their types we can read off directly from the data _definition_. In short, the above typing rule can be defined automatically by desugaring.
+The first antecedent is clear: we have to confirm that the expression `e` evaluates to a #hl(1)[`BT`] before we pattern-match `BT` patterns against it. 
+The second type-checks `e1` in the #hl(2)[same] environment as in the consequent because the `mt` variant does not add any local bindings. The type of this expression needs to be the #hl(3)[same] as the type from the other branch, due to how we're handling conditionals. 
+Finally, to type-check `e2`, we have to #hl(4)[extend] the consequent's type environment with the bound variables; their types we can read off directly from the data _definition_. In short, the above typing rule can be defined automatically by desugaring.
 
 #aside[
   Notice that there is also an assume-guarantee here: we type-check `e2` in an environment that _assumes_ the annotated types; this is _guaranteed_ by the node constructor.

@@ -149,8 +149,8 @@
 }
 
 // Wrap highlighted body in a colored container, branching on the backend.
-#let _hl-box(body, fill, html-mode) = {
-  if html-mode {
+#let hl-box(fill, body) = context {
+  if target() == "html" or target() == "epub" {
     html.elem(
       "span",
       attrs: (
@@ -164,10 +164,12 @@
   }
 }
 
+#let hl(index, body) = hl-box(default-style(index), body)
+
 // Render one segment as inline, syntax-highlighted code.
-#let _render-seg(seg, lang, style, html-mode) = {
+#let _render-seg(seg, lang, style) = {
   let r = raw(seg.text, lang: lang, block: false)
-  if seg.index == none { r } else { _hl-box(r, style(seg.index), html-mode) }
+  if seg.index == none { r } else { hl-box(style(seg.index), r) }
 }
 
 // Render a full listing whose `@N|...|` markers become highlights. `snippet` is
@@ -178,7 +180,7 @@
   let lines = parse-lines(snippet.text)
 
   let render-line(l) = _segments(l.clean, l.spans)
-    .map(s => _render-seg(s, lang, style, html-mode))
+    .map(s => _render-seg(s, lang, style))
     .join()
 
   if html-mode {
