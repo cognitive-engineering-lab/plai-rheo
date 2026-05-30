@@ -5,12 +5,17 @@ on: [push]
 jobs:
   ci:
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
       - uses: typst-community/setup-typst@v5
       - uses: cognitive-engineering-lab/depot/actions/install@main
       - uses: cargo-bins/cargo-binstall@main
-      - run: cargo binstall rheo@0.3.0 && cargo binstall just@1.51.0      
+      - run: cargo binstall rheo@0.3.0 && cargo binstall just@1.51.0
       - run: cd components/code-description && depot build --release
       - run: just link-components
       - run: rheo compile . --pdf --epub --html
