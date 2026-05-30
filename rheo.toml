@@ -1,0 +1,13 @@
+version = "0.3.0"
+
+[html.spine]
+vertebrae = ["chapters/algebraic-datatypes.typ"]
+
+[pdf.spine]
+merge = true 
+vertebrae = ["chapters/algebraic-datatypes.typ"]
+title = "PLAI"
+
+[epub.spine]
+vertebrae = ["chapters/algebraic-datatypes.typ"]
+title = "PLAI"

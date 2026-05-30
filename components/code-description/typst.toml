@@ -1,0 +1,12 @@
+[package]
+name = "code-description"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Will Crichton <crichton.will@gmail.com>"]
+license = "MIT"
+description = "TODO"
+repository = "TODO"
+
+[tool.rheo.html]
+js_scripts = "dist/code-description.iife.js" 
+css_stylesheet = "styles.css"
