@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: cognitive-engineering-lab/depot/actions/install@main
       - uses: cargo-bins/cargo-binstall@main
       - run: cargo binstall rheo@0.3.0
-      - run: rheo build . --pdf --epub --html
+      - run: cd components/code-description && depot build --release
+      - run: rheo compile . --pdf --epub --html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: build/
