@@ -7,10 +7,11 @@ watch-pdf:
 watch-epub:
   rheo watch . --epub --open
 
-cache_path := shell("set -euo pipefail; typst info -f json | jq -r '.packages[\"package-cache-path\"]'")
-
 link-component component:
-  mkdir -p {{ cache_path }}/preview/{{ component }}
-  ln -s $(pwd)/components/{{ component }} {{ cache_path }}/preview/{{ component }}/0.1.0
+  #!/usr/bin/env bash
+  set -euo pipefail
+  CACHE_PATH=$(typst info -f json | jq -r '.packages."package-cache-path"')
+  mkdir -p $CACHE_PATH/preview/{{ component }}
+  ln -s $(pwd)/components/{{ component }} $CACHE_PATH/preview/{{ component }}/0.1.0
 
 link-components: (link-component "code-description")
