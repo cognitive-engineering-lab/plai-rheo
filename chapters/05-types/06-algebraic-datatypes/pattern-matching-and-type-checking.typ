@@ -1,6 +1,6 @@
-#import "../../prelude.typ": *
+#import "/prelude.typ": *
 
-== Pattern Matching and Type-Checking
+== Pattern-Matching and Type-Checking
 
 This kind of error cannot occur naturally in languages like OCaml and Haskell. Instead of exposing all these predicates and accessors, instances of an algebraic datatype are deconstructed using pattern-matching. Thus, the size computation would be written as (`-pm` stands for "pattern matching"):
 
